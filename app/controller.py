@@ -3,7 +3,7 @@ from helper import *
 
 def initialize_bot():
 
-	bot = telebot.TeleBot("269247137:AAFkNU_uW9IlZN8svGGisMP3TFNdIQAXm1Q")
+	bot = telebot.TeleBot("API_KEY")
 
 	@bot.message_handler(commands=['start', 'help'])
 	def send_welcome(message):
