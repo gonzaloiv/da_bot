@@ -1,9 +1,10 @@
 import telebot
 from helper import *
+from config import API_KEY
 
 def initialize_bot():
 
-	bot = telebot.TeleBot("API_KEY")
+	bot = telebot.TeleBot(API_KEY)
 
 	@bot.message_handler(commands=['start', 'help'])
 	def send_welcome(message):
