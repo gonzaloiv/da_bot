@@ -1,20 +1,12 @@
 import telebot
-from config import API_KEY
-from helper import *
 from peewee import *
 
+from config import API_KEY
 
-def initialize_bot(db):
+from helper import *
+from models import User
 
-	class User(Model):
-			name = CharField()
-			telegram_id = TextField(unique=True)
-
-			class Meta:
-					database = db
-
-	# db.drop_tables([User])
-	# db.create_tables([User])
+def initialize_bot():
 
 	bot = telebot.TeleBot(API_KEY)
 

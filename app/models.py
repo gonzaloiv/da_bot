@@ -1,8 +1,19 @@
 from peewee import *
-from main import *
 
-class User(Model):
-    name = CharField()
+from config import DATABASE_NAME
 
-    class Meta:
-        database = main.db # This model uses the "people.db" database.
+# from main import db
+
+db = SqliteDatabase(DATABASE_NAME)
+db.connect()
+
+class BaseModel(Model):
+  class Meta:
+    database = db
+
+class User(BaseModel):
+  name = CharField()
+  telegram_id = TextField(unique=True)
+
+db.drop_tables([User])
+db.create_tables([User])
