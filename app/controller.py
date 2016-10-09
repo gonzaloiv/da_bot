@@ -1,14 +1,27 @@
 import telebot
-from helper import *
 from config import API_KEY
+from helper import *
+from peewee import *
 
-def initialize_bot():
+
+def initialize_bot(db):
+
+	class User(Model):
+			name = CharField()
+			telegram_id = TextField()
+
+			class Meta:
+					database = db # This model uses the "people.db" database.
+
+	db.drop_tables([User])
+	db.create_tables([User])
 
 	bot = telebot.TeleBot(API_KEY)
 
 	@bot.message_handler(commands=['start', 'help'])
 	def send_welcome(message):
-		bot.reply_to(message, "Wat da bot?")
+			User(name=message.from_user.first_name, telegram_id=message.from_user.id).save()
+			bot.reply_to(message, "Wat da bot? " + User.get(User.telegram_id == message.from_user.id).name)
 
 	@bot.message_handler(commands=['foto'])
 	def send_photo(message):
@@ -22,5 +35,7 @@ def initialize_bot():
 	@bot.message_handler(func=lambda m: True)
 	def echo_all(message):
 		bot.reply_to(message, message.text + message.from_user.first_name)
+
+
 
 	return bot

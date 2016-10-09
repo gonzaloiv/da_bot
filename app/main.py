@@ -1,22 +1,13 @@
 import telebot
+import pdb
 from peewee import *
 from controller import *
+# from user import User
 
-db = SqliteDatabase('people.db')
-
-class Person(Model):
-    name = CharField()
-
-    class Meta:
-        database = db # This model uses the "people.db" database.
+db = SqliteDatabase('bot.db')
 
 db.connect()
-#db.create_tables([Person])
 
-Person(name='Bob').save()
-print Person.get(Person.name == 'Bob').name
-
-
-bot = initialize_bot()
+bot = initialize_bot(db)
 
 bot.polling()
