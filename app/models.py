@@ -14,6 +14,12 @@ class BaseModel(Model):
 class User(BaseModel):
   name = CharField()
   telegram_id = TextField(unique=True)
+  level = IntegerField()
+  experience = IntegerField()
+  money = IntegerField()
+  fans = IntegerField()
+  lastRecolect = TimestampField()
+  joinDate = TimestampField()
 
 db.drop_tables([User])
 db.create_tables([User])
