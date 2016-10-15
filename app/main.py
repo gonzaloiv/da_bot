@@ -1,7 +1,6 @@
 import telebot
 from peewee import *
-from controller import *
-from models import *
+import controller
 
-bot = initialize_bot()
-bot.polling()
+if __name__ == '__main__':
+    controller.initialize_bot().polling()

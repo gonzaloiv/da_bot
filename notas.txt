@@ -1,0 +1,24 @@
+PLAYER_LEVELS = [
+  ligas -> modelo diferente
+    compras
+    acciones
+    partidos
+      selecciona jugadores de la misma liga
+    límite de fans
+  player
+    nivel numérico
+    sin posición
+]
+
+ACTIONS = {
+  acciones de mejora -> 2 / día -> stamina
+    entrenar
+  jugar partido -> contra otro tío
+  comprar -> siempre
+  viajar a ligas
+}
+
+usuario : stamina, popularidad
+
+ligas
+posiblidades de entrenar

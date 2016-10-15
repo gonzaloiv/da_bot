@@ -16,21 +16,19 @@ class BaseModel(Model):
 class User(BaseModel):
   name = CharField()
   telegram_id = TextField(unique=True)
-  level = IntegerField()
-  experience = IntegerField()
-  money = IntegerField()
-  fans = IntegerField()
+  level = IntegerField(default = 0)
+  experience = IntegerField(default = 0)
+  money = IntegerField(default = 0)
+  fans = IntegerField(default = 1)
   lastRecolect = TimestampField()
   joinDate = TimestampField()
 
   def collect(self):
-    if(self.lastRecolect < datetime.datetime.now() - datetime.timedelta(minutes=1)):
-      self.update(money = self.money + self.fans * 1).where(self.telegram_id == message.from_user.id).execute()
-      self.update(lastRecolect = datetime.datetime.now()).where(self.telegram_id == message.from_user.id).execute()
-      #self.update(fans = 2).where(self.telegram_id == message.from_user.id).execute()
+    if(self.lastRecolect < datetime.datetime.now() - datetime.timedelta(seconds=1)):
+      self.update(money = self.money + self.fans * 1, lastRecolect = datetime.datetime.now(), fans = 2).execute()
       return "Recolectado!"
     else:
-      return "Debes esperar 1 min desde la ultima vez para recolectar"
+      return "Debes esperar 1 min. desde la ultima vez para recolectar"
 
   def status(self):
       return (
